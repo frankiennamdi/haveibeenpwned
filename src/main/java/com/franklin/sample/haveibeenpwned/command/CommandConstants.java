@@ -1,6 +1,9 @@
 package com.franklin.sample.haveibeenpwned.command;
 
-public class CommandConstants {
+/**
+ * Holds constants for the Commands
+ */
+public final class CommandConstants {
 
   private static final String SERVICE_BASE = "https://haveibeenpwned.com/api/v2/";
 

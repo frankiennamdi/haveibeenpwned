@@ -13,6 +13,9 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 
+/**
+ * Handle the response from the haveibeenpwned service
+ */
 public class RequestResponseHandler implements ResponseHandler<String> {
 
   public String handleResponse(final HttpResponse response) throws IOException {

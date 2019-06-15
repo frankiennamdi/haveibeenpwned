@@ -14,17 +14,19 @@ import java.util.List;
  * command handler for {@link CommandConstants#BREACHES_COMMAND}
  */
 @Component
-public class BreachesCommand extends AbstractCommand {
+public final class BreachesCommand extends AbstractCommand {
 
   private final CommandSupport commandSupport = new CommandSupport();
 
+  private final HttpSupport httpSupport;
+
   @Autowired
   public BreachesCommand(HttpSupport httpSupport) {
-    super(httpSupport);
+    this.httpSupport = httpSupport;
   }
 
   @Override
-  List<CommandFilter> filters() {
+  protected List<CommandFilter> filters() {
     return Lists.newArrayList(Filter.values());
   }
 
@@ -34,7 +36,7 @@ public class BreachesCommand extends AbstractCommand {
   }
 
   @Override
-  public String process(CommandLine cmd) {
+  public String runCommand(CommandLine cmd) {
     try {
       URIBuilder uriBuilder = new URIBuilder(CommandConstants.BREACHES_SERVICE);
       uriBuilder.addParameters(commandSupport.commandFiltersToNameValuePairs(cmd, filters()));

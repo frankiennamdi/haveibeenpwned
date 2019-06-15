@@ -47,9 +47,10 @@ public class ApplicationITest {
   public void testApplicationNoArgumentPassedIn() {
     Application.main(new String[]{});
     assertThat(outputCapture.toString(), containsString("usage: haveibeenpwned.jar"));
-    assertThat(outputCapture.toString(), containsString("-breachedaccount"));
-    assertThat(outputCapture.toString(), containsString("-breaches"));
-    assertThat(outputCapture.toString(), containsString("-pasteaccount"));
+    assertThat(outputCapture.toString(), containsString("breachedaccount"));
+    assertThat(outputCapture.toString(), containsString("breaches"));
+    assertThat(outputCapture.toString(), containsString("pasteaccount"));
+    assertThat(outputCapture.toString(), containsString("breach"));
   }
 
   private String stripWhiteSpaceAndNewline(String str) {

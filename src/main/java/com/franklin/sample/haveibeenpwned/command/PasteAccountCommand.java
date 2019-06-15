@@ -16,13 +16,15 @@ import java.util.List;
  * Command for the {@link CommandConstants#PASTEACCOUNT_COMMAND}
  */
 @Component
-public class PasteAccountCommand extends AbstractCommand {
+public final class PasteAccountCommand extends AbstractCommand {
 
   private static final String ACCOUNT_OPTION = "account";
 
+  private final HttpSupport httpSupport;
+
   @Autowired
   public PasteAccountCommand(HttpSupport httpSupport) {
-    super(httpSupport);
+    this.httpSupport = httpSupport;
     options.addOption(Option.builder()
             .hasArg()
             .longOpt(ACCOUNT_OPTION)
@@ -34,7 +36,7 @@ public class PasteAccountCommand extends AbstractCommand {
   }
 
   @Override
-  List<CommandFilter> filters() {
+  protected List<CommandFilter> filters() {
     return Lists.newArrayList();
   }
 
@@ -44,7 +46,7 @@ public class PasteAccountCommand extends AbstractCommand {
   }
 
   @Override
-  public String process(CommandLine cmd) {
+  public String runCommand(CommandLine cmd) {
     try {
       String baseUri = Joiner.on("/").join(CommandConstants.PASTEACCOUNT_SERVICE, cmd.getOptionValue(ACCOUNT_OPTION));
       URIBuilder uriBuilder = new URIBuilder(baseUri);

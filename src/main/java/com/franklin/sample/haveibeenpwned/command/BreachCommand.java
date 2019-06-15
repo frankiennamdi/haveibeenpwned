@@ -16,13 +16,15 @@ import java.util.List;
  * command for the {@link CommandConstants#BREACH_COMMAND}
  */
 @Component
-public class BreachCommand extends AbstractCommand {
+public final class BreachCommand extends AbstractCommand {
+
+  private final HttpSupport httpSupport;
 
   private static final String NAME_OPTION = "name";
 
   @Autowired
   public BreachCommand(HttpSupport httpSupport) {
-    super(httpSupport);
+    this.httpSupport = httpSupport;
     options.addOption(Option.builder()
             .hasArg()
             .longOpt(NAME_OPTION)
@@ -34,7 +36,7 @@ public class BreachCommand extends AbstractCommand {
   }
 
   @Override
-  List<CommandFilter> filters() {
+  protected List<CommandFilter> filters() {
     return Lists.newArrayList();
   }
 
@@ -44,7 +46,7 @@ public class BreachCommand extends AbstractCommand {
   }
 
   @Override
-  public String process(CommandLine cmd) {
+  public String runCommand(CommandLine cmd) {
     try {
       String baseUri = Joiner.on("/").join(CommandConstants.BREACH_SERVICE, cmd.getOptionValue(NAME_OPTION));
       URIBuilder uriBuilder = new URIBuilder(baseUri);

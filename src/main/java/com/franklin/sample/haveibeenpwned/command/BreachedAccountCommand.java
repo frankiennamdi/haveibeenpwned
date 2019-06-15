@@ -16,15 +16,17 @@ import java.util.List;
  * handler for the {@link CommandConstants#BREACHED_ACCOUNT_COMMAND}
  */
 @Component
-public class BreachedAccountCommand extends AbstractCommand {
+public final class BreachedAccountCommand extends AbstractCommand {
 
   private static final String ACCOUNT_OPTION = "account";
 
   private final CommandSupport commandSupport = new CommandSupport();
 
+  private final HttpSupport httpSupport;
+
   @Autowired
   public BreachedAccountCommand(HttpSupport httpSupport) {
-    super(httpSupport);
+    this.httpSupport = httpSupport;
     options.addOption(Option.builder()
             .hasArg()
             .longOpt(ACCOUNT_OPTION)
@@ -36,7 +38,7 @@ public class BreachedAccountCommand extends AbstractCommand {
   }
 
   @Override
-  List<CommandFilter> filters() {
+  protected List<CommandFilter> filters() {
     return Lists.newArrayList(Filter.values());
   }
 
@@ -46,7 +48,7 @@ public class BreachedAccountCommand extends AbstractCommand {
   }
 
   @Override
-  public String process(CommandLine cmd) {
+  public String runCommand(CommandLine cmd) {
     try {
       String baseUri = Joiner.on("/").join(CommandConstants.BREACHED_ACCOUNT_SERVICE, cmd.getOptionValue(ACCOUNT_OPTION));
       URIBuilder uriBuilder = new URIBuilder(baseUri);

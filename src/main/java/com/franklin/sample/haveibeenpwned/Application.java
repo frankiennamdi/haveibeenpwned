@@ -15,7 +15,8 @@ public class Application {
     Options options = options();
     if (args.length == 0 || !options.hasOption(args[0])) {
       HelpFormatter formatter = new HelpFormatter();
-      formatter.printHelp("haveibeenpwned.jar", options);
+      formatter.setOptPrefix("");
+      formatter.printHelp("haveibeenpwned.jar | ./pwned", options);
     } else {
       SpringApplication app = new SpringApplication(Application.class);
       app.setBannerMode(Banner.Mode.OFF);
@@ -24,6 +25,7 @@ public class Application {
   }
 
   private static Options options() {
+    // register the command we support
     Options options = new Options();
     Option breachedAccountOpt = Option.builder(CommandConstants.BREACHED_ACCOUNT_COMMAND).build();
     Option breachesOpt = Option.builder(CommandConstants.BREACHES_COMMAND).build();
