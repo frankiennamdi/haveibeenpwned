@@ -11,8 +11,8 @@ some of the services
 
 # Tests
 
-All the test are integration test as they access the **haveibeenpwned** site. So
-it is possible to reach the rate limit if run repeatedly. This gives us
+All the tests are integration tests as they access the **haveibeenpwned** site. So
+it is possible to reach the rate limit if run repeatedly and frequently. This gives us
 100 percent coverage. In the future some unit tests can be added.
 
 # Build
@@ -27,6 +27,8 @@ Below are some examples of how to execute the application.
 
 ### Printing the services supported
 
+/pwned is a wrapper script around the `java -jar haveibeenpwned.jar`
+
 ```
 ./pwned
 ```
@@ -40,7 +42,7 @@ or
 output:
 
 ```
-usage: haveibeenpwned.jar
+usage: haveibeenpwned.jar | ./pwned
  breach
  breachedaccount
  breaches
@@ -116,6 +118,3 @@ usage: haveibeenpwned.jar
 ./gradlew -q bootRun -Pargs="pasteaccount -help"
 
 ```
-
-
-
