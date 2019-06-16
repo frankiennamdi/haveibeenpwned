@@ -15,7 +15,7 @@ plugins {
   id 'org.springframework.boot' version '2.1.5.RELEASE'
 }
 
-group 'com.franklin.sample.fireeye'
+group 'com.franklin.sample'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
